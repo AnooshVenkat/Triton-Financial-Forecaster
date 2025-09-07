@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Triton Stock Forecaster</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📈 Triton Sentiment Stock Forecaster</h1>
+            <p>Select a stock and get a weekly price direction forecast, powered by XGBoost and real-time news sentiment, served via NVIDIA Triton.</p>
+        </header>
+        <main>
+            <div class="controls">
+                <div class="select-group">
+                    <label for="industry-select">Select Industry:</label>
+                    <select id="industry-select"></select>
+                </div>
+                <div class="select-group">
+                    <label for="stock-select">Select Stock:</label>
+                    <select id="stock-select"></select>
+                </div>
+                <button id="predict-btn">Predict</button>
+            </div>
+            
+            <div id="results-container" class="hidden">
+                <div id="spinner" class="spinner hidden"></div>
+                <div id="results-content">
+                    <h2>Results for <span id="result-ticker"></span></h2>
+                    <div class="results-grid">
+                        <div class="result-box">
+                            <h3>Weekly Forecast</h3>
+                            <p id="prediction-result">--</p>
+                        </div>
+                        <div class="result-box">
+                            <h3>Current News Sentiment</h3>
+                            <p id="sentiment-result">--</p>
+                        </div>
+                    </div>
+                    <div class="chart-container">
+                        <img id="price-chart" src="" alt="Stock Price Chart">
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+    const STOCKS_DATA = {{ stocks_data | tojson | safe }};
+    </script>
+
+    <script src="/static/script.js"></script>
+</body>
+</html>

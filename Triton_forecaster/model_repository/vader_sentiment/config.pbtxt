@@ -1,0 +1,22 @@
+name: "vader_sentiment"
+backend: "python"
+max_batch_size: 0 # This is the only change
+#... rest of the file
+
+# Input is a variable-length string for the headline
+input [
+  {
+    name: "TEXT_INPUT"
+    data_type: TYPE_STRING
+    dims: [ -1 ]
+  }
+]
+
+# Output is a single float for the sentiment score
+output [
+  {
+    name: "SENTIMENT_SCORE"
+    data_type: TYPE_FP32
+    dims: [ -1 ]
+  }
+]

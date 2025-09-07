@@ -1,0 +1,19 @@
+name: "xgboost_predictor"
+backend: "python"
+max_batch_size: 0
+
+input [
+  {
+    name: "input__0"
+    data_type: TYPE_FP32
+    dims: [ -1, 11 ]
+  }
+]
+
+output [
+  {
+    name: "output__0"
+    data_type: TYPE_FP32
+    dims: [ -1, 1 ]
+  }
+]

@@ -1,0 +1,36 @@
+
+services:
+  triton-server:
+    build:
+      context: .
+      dockerfile: triton.Dockerfile
+    ports:
+      - "8000:8000"
+      - "8001:8001"
+      - "8002:8002"
+    volumes:
+      - ./model_repository:/models
+    command: tritonserver --model-repository=/models
+    networks:
+      app_net:
+        ipv4_address: 192.168.200.10
+
+  flask-app:
+    build: ./flask_app
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./flask_app:/app
+    environment:
+      - NEWS_API_KEY=${NEWS_API_KEY}
+    depends_on:
+      - triton-server
+    networks:
+      - app_net
+
+networks:
+  app_net:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 192.168.200.0/24
